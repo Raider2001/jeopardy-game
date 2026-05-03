@@ -1,23 +1,49 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Jeopardy</title>
-  <link href="https://fonts.googleapis.com/css?family=Copse&display=swap"
-        rel="stylesheet">
-  <link rel="stylesheet" href="jeopardy.css">
+      <meta charset="UTF-8">
+      <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Jeopardy</title>
+      <link href="https://fonts.googleapis.com/css?family=Copse&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="jeopardy.css">
 </head>
+
 <body>
-<h1>Jeopardy!</h1>
-<button id="start">Start!</button>
-<table id="jeopardy"></table>
-<script src="https://unpkg.com/jquery"></script>
-<script src="https://unpkg.com/axios/dist/axios.js"></script>
-<script src="https://unpkg.com/lodash"></script>
-<script src="jeopardy.js"></script>
+      <h1>Jeopardy!</h1>
+      
+      <div id="top-bar">
+            <div id="scoreboard">
+                  Score: <span id="score">0</span>
+            </div>
+            <button id="start">Start!</button>
+      </div>
+      
+      <div id="loading" style="display:none;">
+            <img src="https://media.giphy.com/media/y1ZBcOGOOtlpC/giphy.gif" alt="loading">
+      </div>
+      
+      <div id="game-container">
+      
+            <!-- LEFT SIDE: BOARD -->
+            <div id="board-area">
+                  <table id="jeopardy"></table>
+            </div>
+      
+            <!-- RIGHT SIDE: ANSWER PANEL -->
+            <div id="side-panel">
+                  <div id="answer-input" style="display:none;"></div>
+            </div>
+      
+      </div>
+
+      <script src="https://unpkg.com/jquery"></script>
+      <script src="https://unpkg.com/axios/dist/axios.js"></script>
+      <script src="https://unpkg.com/lodash"></script>
+      <script src="jeopardy.js"></script>
 
 </body>
+
 </html>

@@ -1,7 +1,9 @@
 const NUM_CATEGORIES = 6;
 const NUM_CLUES_PER_CAT = 5;
 
+let score = 0;
 let categories = [];
+
 
 /** get random category IDs */
 async function getCategoryIds() {
@@ -72,7 +74,6 @@ async function fillTable() {
 /** handle click */
 function handleClick(evt) {
   const id = $(evt.target).attr("id");
-
   if (!id) return;
 
   const [catIdx, clueIdx] = id.split("-");
@@ -81,20 +82,73 @@ function handleClick(evt) {
   if (clue.showing === null) {
     $(evt.target).text(clue.question);
     clue.showing = "question";
-  } else if (clue.showing === "question") {
-    $(evt.target).text(clue.answer);
-    clue.showing = "answer";
+
+    // Add input field and hint button
+    const inputDiv = $("#answer-input");
+    inputDiv.show();
+    inputDiv.html(`<div><input type="text" id="answer-field" placeholder="Your answer"><button id="submit-answer">Submit</button></div><button id="hint-button" class="hint-btn">Show Hint</button><div id="hint-box" style="display:none; margin-top: 10px; padding: 10px; background-color: #ffd700; border-radius: 5px;"></div>`);
+
+    // Start timer
+    let timer = setTimeout(() => {
+      // Show answer as hint
+      $(evt.target).text(clue.answer);
+      setTimeout(() => {
+        $(evt.target).text(clue.question);
+        clue.showing = null;
+        inputDiv.hide();
+      }, 2000); // show answer for 2 seconds, then back
+    }, 10000); // 10 seconds
+
+    // On hint button click
+    $("#hint-button").one("click", function() {
+      const hintBox = $("#hint-box");
+      hintBox.text(clue.answer);
+      hintBox.show();
+      $(this).prop("disabled", true);
+      
+      setTimeout(() => {
+        hintBox.hide();
+        $("#hint-button").prop("disabled", false);
+      }, 10000);
+    });
+
+    // On submit
+    $("#submit-answer").one("click", function() {
+      clearTimeout(timer);
+      const userAnswer = $("#answer-field").val().trim();
+      inputDiv.hide();
+      if (userAnswer.toLowerCase().includes(clue.answer.toLowerCase())) {
+        score += 100;
+        const scoreEl = $("#score");
+        scoreEl.text(score);
+        scoreEl.addClass("graffiti-drop");
+        setTimeout(() => {
+          scoreEl.removeClass("graffiti-drop");
+        }, 1000);
+        $(evt.target).css("background-color", "#28a200");
+        clue.showing = "answered";
+      } else {
+        console.log("incorrect");
+        $(evt.target).css("background-color", "#8d2ab5");
+        $(evt.target).text(`INCORRECT\n\nCorrect Answer: ${clue.answer}`);
+        clue.showing = "answered";
+      }
+    });
   }
 }
 
 /** loading UI */
+
 function showLoadingView() {
   $("#jeopardy").hide();
+  $("#loading").show();
   $("#start").text("Loading...");
 }
 
+
 /** hide loading */
 function hideLoadingView() {
+  $("#loading").hide();
   $("#jeopardy").show();
   $("#start").text("Restart!");
 }
@@ -102,6 +156,9 @@ function hideLoadingView() {
 /** setup game */
 async function setupAndStart() {
   showLoadingView();
+
+  score = 0;
+  $("#score").text(score);
 
   categories = [];
 

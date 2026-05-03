@@ -5,3 +5,160 @@
   #8d2ab5
   #74119c
 */
+body {
+  background-color: #115ff4;
+  font-family: "Copse", serif;
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 3rem;
+}
+
+#loading {
+  margin-top: 30px;
+}
+
+#start {
+  background-color: #8d2ab5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  margin: 15px;
+  cursor: pointer;
+}
+
+#start:hover {
+  background-color: #74119c;
+}
+
+#jeopardy {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+#jeopardy th {
+  background-color: #060ce9;
+  padding: 10px;
+  font-size: 1rem;
+  width: 150px;
+}
+
+#jeopardy td {
+  width: 150px;
+  height: 100px;
+  border: 2px solid white;
+  background-color: #060ce9;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#jeopardy td:hover {
+  background-color: #28a200;
+}
+
+#scoreboard {
+  font-size: 20px;
+  margin: 10px;
+}
+
+#answer-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#answer-input div {
+  display: flex;
+  gap: 10px;
+}
+
+#answer-field {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 2px solid white;
+  border-radius: 4px;
+  width: 250px;
+}
+
+#submit-answer {
+  padding: 8px 20px;
+  font-size: 16px;
+  background-color: #28a200;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#submit-answer:hover {
+  background-color: #1e7800;
+}
+
+.hint-btn {
+  padding: 8px 20px;
+  font-size: 16px;
+  background-color: #ffd700;
+  color: #115ff4;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.hint-btn:hover:not(:disabled) {
+  background-color: #ffed4e;
+}
+
+.hint-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#hint-box {
+  padding: 15px;
+  background-color: #ffd700;
+  color: #115ff4;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  max-width: 300px;
+}
+
+.clue {
+  transition: all 0.3s ease;
+}
+
+#score {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.score-pop {
+  transform: scale(1.5);
+  color: #28a200;
+}
+
+.graffiti-drop {
+  animation: graffiti 1s ease-in-out;
+  color: #ffd700;
+  /* gold */
+}
+
+@keyframes graffiti {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(2) rotate(180deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
